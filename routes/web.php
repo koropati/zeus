@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Permissions\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::get('login', 'Auth\LoginController@login')->name('login');
     Route::post('login', 'Auth\LoginController@authenticate');
     Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-    Route::get('home', 'HomeController@home')->name('home');
+    
     Route::get('forget-password', 'Auth\ForgotPasswordController@getEmail');
     Route::post('forget-password', 'Auth\ForgotPasswordController@postEmail');
     Route::get('reset-password/{token}', 'Auth\ResetPasswordController@getPassword');
     Route::post('reset-password', 'Auth\ResetPasswordController@updatePassword');
+
+    Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
+        Route::get('/', 'DashboardController@dashboard')->name('dashboard');
+    });
 });
