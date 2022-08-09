@@ -31,7 +31,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::get('reset-password/{token}', 'Auth\ResetPasswordController@getPassword');
     Route::post('reset-password', 'Auth\ResetPasswordController@updatePassword');
 
-    Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
-        Route::get('/', 'DashboardController@dashboard')->name('dashboard');
+    Route::group(['middleware' => ['auth']], function() {
+        /**
+        * Verification Routes
+        */
+        Route::get('/email/verify', 'VerificationController@show')->name('verification.notice');
+        Route::get('/email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify')->middleware(['signed']);
+        Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
     });
+
+    Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
+        Route::group(['middleware' => ['verified']], function() {
+            Route::get('/', 'DashboardController@dashboard')->name('dashboard');
+        });
+    });
+
+
+
 });

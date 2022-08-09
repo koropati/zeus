@@ -27,6 +27,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
         $user->assignRole('Client');
+        event(new Registered($user));
         return redirect('login');
     }
 }

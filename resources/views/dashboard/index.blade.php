@@ -2,7 +2,7 @@
 
 @section('title-page')
     <title>
-        Argon Dashboard 2 by Creative Tim
+        {{ config('app.name') }} Dashboard
     </title>
 @endsection
 @section('content')
