@@ -42,7 +42,7 @@
         class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent mt-4">
         <div class="container">
             <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 text-white" href="../pages/dashboard.html">
-                {{ config('app.name') }} Dashboard
+                Zeus Data Center
             </a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
@@ -54,32 +54,37 @@
                 </span>
             </button>
             <div class="collapse navbar-collapse" id="navigation">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center me-2 active" aria-current="page"
-                            href="../pages/dashboard.html">
-                            <i class="fa fa-chart-pie opacity-6  me-1"></i>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link me-2" href="../pages/profile.html">
-                            <i class="fa fa-user opacity-6  me-1"></i>
-                            Profile
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link me-2" href="../pages/sign-up.html">
-                            <i class="fas fa-user-circle opacity-6  me-1"></i>
-                            Sign Up
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link me-2" href="../pages/sign-in.html">
-                            <i class="fas fa-key opacity-6  me-1"></i>
-                            Sign In
-                        </a>
-                    </li>
+                <ul class="navbar-nav">
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center me-2 active" aria-current="page"
+                                href="{{ url('/') }}">
+                                <i class="fa fa-chart-pie opacity-6  me-1"></i>
+                                My dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="../pages/profile.html">
+                                <i class="fa fa-user opacity-6  me-1"></i>
+                                Profile
+                            </a>
+                        </li>
+                    @else
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link me-2" href="{{ route('register') }}">
+                                    <i class="fas fa-user-circle opacity-6  me-1"></i>
+                                    Sign Up
+                                </a>
+                            </li>
+                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="{{ route('login') }}">
+                                <i class="fas fa-key opacity-6  me-1"></i>
+                                Sign In
+                            </a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
@@ -218,7 +223,7 @@
                                     <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign
                                         up</button>
                                 </div>
-                                <p class="text-sm mt-3 mb-0">Already have an account? <a href="javascript:;"
+                                <p class="text-sm mt-3 mb-0">Already have an account? <a href="{{ route('login') }}"
                                         class="text-dark font-weight-bolder">Sign in</a></p>
                             </form>
                         </div>
