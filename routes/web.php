@@ -40,12 +40,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('/email/resend', 'VerificationController@resend')->name('verification.resend');
     });
 
-    Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
-        Route::group(['middleware' => ['verified']], function() {
+    Route::group(['prefix' => 'app', 'middleware' =>  ['auth','verified']], function () {
             Route::get('/', 'DashboardController@dashboard')->name('dashboard');
-        });
     });
-
-
 
 });

@@ -20,10 +20,22 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'create-users']);
         Permission::create(['name' => 'edit-users']);
         Permission::create(['name' => 'delete-users']);
+        Permission::create(['name' => 'retrieve-users']);
 
         Permission::create(['name' => 'create-contacts']);
         Permission::create(['name' => 'edit-contacts']);
         Permission::create(['name' => 'delete-contacts']);
+        Permission::create(['name' => 'retrieve-contacts']);
+
+        Permission::create(['name' => 'create-stunt-gun']);
+        Permission::create(['name' => 'edit-stunt-gun']);
+        Permission::create(['name' => 'delete-stunt-gun']);
+        Permission::create(['name' => 'retrieve-stunt-gun']);
+
+        Permission::create(['name' => 'create-device-log']);
+        Permission::create(['name' => 'edit-device-log']);
+        Permission::create(['name' => 'delete-device-log']);
+        Permission::create(['name' => 'retrieve-device-log']);
 
         $adminRole = Role::create(['name' => 'Admin']);
         $clientRole = Role::create(['name' => 'Client']);
@@ -32,15 +44,30 @@ class RoleAndPermissionSeeder extends Seeder
             'create-users',
             'edit-users',
             'delete-users',
+            'retrieve-users',
             'create-contacts',
             'edit-contacts',
             'delete-contacts',
+            'retrieve-contacts',
+            'create-stunt-gun',
+            'edit-stunt-gun',
+            'delete-stunt-gun',
+            'retrieve-stunt-gun',
+            'create-device-log',
+            'edit-device-log',
+            'delete-device-log',
+            'retrieve-device-log',
         ]);
 
         $clientRole->givePermissionTo([
             'create-contacts',
             'edit-contacts',
             'delete-contacts',
+            'retrieve-contacts',
+            'retrieve-stunt-gun',
+            'create-device-log',
+            'retrieve-device-log',
+
         ]);
 
 

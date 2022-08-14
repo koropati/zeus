@@ -10,5 +10,11 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "vite": "^3.0.0"
+    },
+    "dependencies": {
+        "datatables.net-bs4": "^1.12.1",
+        "datatables.net-buttons-bs4": "^2.2.3",
+        "datatables.net-searchpanes-bs4": "^2.0.2",
+        "datatables.net-select-bs4": "^1.4.0"
     }
 }
