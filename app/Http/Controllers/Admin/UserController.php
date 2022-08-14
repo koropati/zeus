@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Permissions\Permission;
+use DataTables;
 
 class UserController extends Controller
 {
@@ -15,7 +17,28 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        if (!auth()->user()->can(Permission::CAN_RETRIEVE_USERS)) {
+            return redirect('login');
+        }
+        return view('user.index');
+    }
+
+    public function getUsers(Request $request)
+    {
+        if (!auth()->user()->can(Permission::CAN_RETRIEVE_USERS)) {
+            return redirect('login');
+        }
+        if ($request->ajax()) {
+            $data = User::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 
     /**

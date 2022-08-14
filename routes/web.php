@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Permissions\Permission;
-
+use App\Http\Controllers\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +42,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
     Route::group(['prefix' => 'app', 'middleware' =>  ['auth','verified']], function () {
             Route::get('/', 'DashboardController@dashboard')->name('dashboard');
+
+            Route::get('user/list', [UserController::class, 'getUsers'])->name('user.list');
+            Route::resource('user', UserController::class)->only([
+                'index', 'show'
+            ]);
     });
 
 });

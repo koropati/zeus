@@ -69,3 +69,9 @@ php artisan make:controller ItemController --resource --model=Item
 
 ## Create Seeder
 php artisan make:seeder UserSeeder
+
+## User role and permission 
+https://www.honeybadger.io/blog/user-roles-permissions-in-laravel/
+
+## Datatables yajra
+https://www.positronx.io/laravel-datatables-example/
