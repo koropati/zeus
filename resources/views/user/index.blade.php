@@ -2,88 +2,68 @@
 
 @section('title-page')
     <title>
-        {{ config('app.name') }} User
+        Master Data User - {{ config('app.name') }}
     </title>
 @endsection
 
 @section('header-plugin')
-<style>
-    div.dataTables_length label {
-        text-align: left;
-        font-weight: 400;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-    }
-    label {
-        display: inline-block;
-        margin-bottom: 0.5rem;
-    }
-</style>
+    <!-- Custom Stylesheet -->
+    <link href="{{ asset('assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 
+
 @section('content')
-    {{-- <div class="container mt-5">
-        <h2 class="mb-4">User Data</h2>
-        <table class="table table-bordered yajra-datatable">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div> --}}
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">User</a></li>
+            </ol>
+        </div>
+    </div>
 
-
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h6>User Data</h6>
-                    </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0 yajra-datatable">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Data User</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered zero-configuration yajra-datatable">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            No
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Name
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Email
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Action
-                                        </th>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 @endsection
 
 @section('footer-plugin')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="{{ asset('assets/plugins/tables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/plugins/tables/js/datatable-init/datatable-basic.min.js') }}"></script> --}}
 
     @include('user.js')
-
 @endsection

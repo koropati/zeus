@@ -5,393 +5,571 @@
         {{ config('app.name') }} Dashboard
     </title>
 @endsection
+
+@section('header-plugin')
+    <!-- Pignose Calender -->
+    <link href="{{ asset('assets/plugins/pg-calendar/css/pignose.calendar.min.css') }}" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/chartist/css/chartist.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css') }}">
+@endsection
+
 @section('content')
-    <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card gradient-1">
+                    <div class="card-body">
+                        <h3 class="card-title text-white">Products Sold</h3>
+                        <div class="d-inline-block">
+                            <h2 class="text-white">4565</h2>
+                            <p class="text-white mb-0">Jan - March 2019</p>
+                        </div>
+                        <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card gradient-2">
+                    <div class="card-body">
+                        <h3 class="card-title text-white">Net Profit</h3>
+                        <div class="d-inline-block">
+                            <h2 class="text-white">$ 8541</h2>
+                            <p class="text-white mb-0">Jan - March 2019</p>
+                        </div>
+                        <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card gradient-3">
+                    <div class="card-body">
+                        <h3 class="card-title text-white">New Customers</h3>
+                        <div class="d-inline-block">
+                            <h2 class="text-white">4565</h2>
+                            <p class="text-white mb-0">Jan - March 2019</p>
+                        </div>
+                        <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card gradient-4">
+                    <div class="card-body">
+                        <h3 class="card-title text-white">Customer Satisfaction</h3>
+                        <div class="d-inline-block">
+                            <h2 class="text-white">99%</h2>
+                            <p class="text-white mb-0">Jan - March 2019</p>
+                        </div>
+                        <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body pb-0 d-flex justify-content-between">
+                                <div>
+                                    <h4 class="mb-1">Product Sales</h4>
+                                    <p>Total Earnings of the Month</p>
+                                    <h3 class="m-0">$ 12,555</h3>
+                                </div>
+                                <div>
+                                    <ul>
+                                        <li class="d-inline-block mr-3"><a class="text-dark" href="#">Day</a></li>
+                                        <li class="d-inline-block mr-3"><a class="text-dark" href="#">Week</a></li>
+                                        <li class="d-inline-block"><a class="text-dark" href="#">Month</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="chart_widget_2"></canvas>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="w-100 mr-2">
+                                        <h6>Pixel 2</h6>
+                                        <div class="progress" style="height: 6px">
+                                            <div class="progress-bar bg-danger" style="width: 40%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="ml-2 w-100">
+                                        <h6>iPhone X</h6>
+                                        <div class="progress" style="height: 6px">
+                                            <div class="progress-bar bg-primary" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Order Summary</h4>
+                        <div id="morris-bar-chart"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card card-widget">
+                    <div class="card-body">
+                        <h5 class="text-muted">Order Overview </h5>
+                        <h2 class="mt-4">5680</h2>
+                        <span>Total Revenue</span>
+                        <div class="mt-4">
+                            <h4>30</h4>
+                            <h6>Online Order <span class="pull-right">30%</span></h6>
+                            <div class="progress mb-3" style="height: 7px">
+                                <div class="progress-bar bg-primary" style="width: 30%;" role="progressbar"><span
+                                        class="sr-only">30% Order</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4>50</h4>
+                            <h6 class="m-t-10 text-muted">Offline Order <span class="pull-right">50%</span></h6>
+                            <div class="progress mb-3" style="height: 7px">
+                                <div class="progress-bar bg-success" style="width: 50%;" role="progressbar"><span
+                                        class="sr-only">50% Order</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4>20</h4>
+                            <h6 class="m-t-10 text-muted">Cash On Develery <span class="pull-right">20%</span></h6>
+                            <div class="progress mb-3" style="height: 7px">
+                                <div class="progress-bar bg-warning" style="width: 20%;" role="progressbar"><span
+                                        class="sr-only">20% Order</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-body px-0">
+                        <h4 class="card-title px-4 mb-3">Todo</h4>
+                        <div class="todo-list">
+                            <div class="tdl-holder">
+                                <div class="tdl-content">
+                                    <ul id="todo_list">
+                                        <li><label><input type="checkbox"><i></i><span>Get up</span><a href='#'
+                                                    class="ti-trash"></a></label></li>
+                                        <li><label><input type="checkbox" checked><i></i><span>Stand up</span><a
+                                                    href='#' class="ti-trash"></a></label></li>
+                                        <li><label><input type="checkbox"><i></i><span>Don't give up the fight.</span><a
+                                                    href='#' class="ti-trash"></a></label></li>
+                                        <li><label><input type="checkbox" checked><i></i><span>Do something else</span><a
+                                                    href='#' class="ti-trash"></a></label></li>
+                                    </ul>
+                                </div>
+                                <div class="px-4">
+                                    <input type="text" class="tdl-new form-control"
+                                        placeholder="Write new item and hit 'Enter'...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img src="./images/users/8.jpg" class="rounded-circle" alt="">
+                            <h5 class="mt-3 mb-1">Ana Liem</h5>
+                            <p class="m-0">Senior Manager</p>
+                            <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img src="./images/users/5.jpg" class="rounded-circle" alt="">
+                            <h5 class="mt-3 mb-1">John Abraham</h5>
+                            <p class="m-0">Store Manager</p>
+                            <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img src="./images/users/7.jpg" class="rounded-circle" alt="">
+                            <h5 class="mt-3 mb-1">John Doe</h5>
+                            <p class="m-0">Sales Man</p>
+                            <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img src="./images/users/1.jpg" class="rounded-circle" alt="">
+                            <h5 class="mt-3 mb-1">Mehedi Titas</h5>
+                            <p class="m-0">Online Marketer</p>
+                            <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="active-member">
+                            <div class="table-responsive">
+                                <table class="table table-xs mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Customers</th>
+                                            <th>Product</th>
+                                            <th>Country</th>
+                                            <th>Status</th>
+                                            <th>Payment Method</th>
+                                            <th>Activity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><img src="./images/avatar/1.jpg" class=" rounded-circle mr-3"
+                                                    alt="">Sarah Smith</td>
+                                            <td>iPhone X</td>
+                                            <td>
+                                                <span>United States</span>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <div class="progress" style="height: 6px">
+                                                        <div class="progress-bar bg-success" style="width: 50%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><i class="fa fa-circle-o text-success  mr-2"></i> Paid</td>
+                                            <td>
+                                                <span>Last Login</span>
+                                                <span class="m-0 pl-3">10 sec ago</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="./images/avatar/2.jpg" class=" rounded-circle mr-3"
+                                                    alt="">Walter R.</td>
+                                            <td>Pixel 2</td>
+                                            <td><span>Canada</span></td>
+                                            <td>
+                                                <div>
+                                                    <div class="progress" style="height: 6px">
+                                                        <div class="progress-bar bg-success" style="width: 50%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><i class="fa fa-circle-o text-success  mr-2"></i> Paid</td>
+                                            <td>
+                                                <span>Last Login</span>
+                                                <span class="m-0 pl-3">50 sec ago</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="./images/avatar/3.jpg" class=" rounded-circle mr-3"
+                                                    alt="">Andrew D.</td>
+                                            <td>OnePlus</td>
+                                            <td><span>Germany</span></td>
+                                            <td>
+                                                <div>
+                                                    <div class="progress" style="height: 6px">
+                                                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><i class="fa fa-circle-o text-warning  mr-2"></i> Pending</td>
+                                            <td>
+                                                <span>Last Login</span>
+                                                <span class="m-0 pl-3">10 sec ago</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="./images/avatar/6.jpg" class=" rounded-circle mr-3"
+                                                    alt=""> Megan S.</td>
+                                            <td>Galaxy</td>
+                                            <td><span>Japan</span></td>
+                                            <td>
+                                                <div>
+                                                    <div class="progress" style="height: 6px">
+                                                        <div class="progress-bar bg-success" style="width: 50%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><i class="fa fa-circle-o text-success  mr-2"></i> Paid</td>
+                                            <td>
+                                                <span>Last Login</span>
+                                                <span class="m-0 pl-3">10 sec ago</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="./images/avatar/4.jpg" class=" rounded-circle mr-3"
+                                                    alt=""> Doris R.</td>
+                                            <td>Moto Z2</td>
+                                            <td><span>England</span></td>
+                                            <td>
+                                                <div>
+                                                    <div class="progress" style="height: 6px">
+                                                        <div class="progress-bar bg-success" style="width: 50%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><i class="fa fa-circle-o text-success  mr-2"></i> Paid</td>
+                                            <td>
+                                                <span>Last Login</span>
+                                                <span class="m-0 pl-3">10 sec ago</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="./images/avatar/5.jpg" class=" rounded-circle mr-3"
+                                                    alt="">Elizabeth W.</td>
+                                            <td>Notebook Asus</td>
+                                            <td><span>China</span></td>
+                                            <td>
+                                                <div>
+                                                    <div class="progress" style="height: 6px">
+                                                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><i class="fa fa-circle-o text-warning  mr-2"></i> Pending</td>
+                                            <td>
+                                                <span>Last Login</span>
+                                                <span class="m-0 pl-3">10 sec ago</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-3 col-lg-6 col-sm-6 col-xxl-6">
+
+                <div class="card">
+                    <div class="chart-wrapper mb-4">
+                        <div class="px-4 pt-4 d-flex justify-content-between">
+                            <div>
+                                <h4>Sales Activities</h4>
+                                <p>Last 6 Month</p>
+                            </div>
+                            <div>
+                                <span><i class="fa fa-caret-up text-success"></i></span>
+                                <h4 class="d-inline-block text-success">720</h4>
+                                <p class=" text-danger">+120.5(5.0%)</p>
+                            </div>
+                        </div>
+                        <div>
+                            <canvas id="chart_widget_3"></canvas>
+                        </div>
+                    </div>
+                    <div class="card-body border-top pt-4">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul>
+                                    <li>5% Negative Feedback</li>
+                                    <li>95% Positive Feedback</li>
+                                </ul>
+                                <div>
+                                    <h5>Customer Feedback</h5>
+                                    <h3>385749</h3>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div id="chart_widget_3_1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-sm-6 col-xxl-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Activity</h4>
+                        <div id="activity">
+                            <div class="media border-bottom-1 pt-3 pb-3">
+                                <img width="35" src="./images/avatar/1.jpg" class="mr-3 rounded-circle">
+                                <div class="media-body">
+                                    <h5>Received New Order</h5>
+                                    <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                </div><span class="text-muted ">April 24, 2018</span>
+                            </div>
+                            <div class="media border-bottom-1 pt-3 pb-3">
+                                <img width="35" src="./images/avatar/2.jpg" class="mr-3 rounded-circle">
+                                <div class="media-body">
+                                    <h5>iPhone develered</h5>
+                                    <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                </div><span class="text-muted ">April 24, 2018</span>
+                            </div>
+                            <div class="media border-bottom-1 pt-3 pb-3">
+                                <img width="35" src="./images/avatar/2.jpg" class="mr-3 rounded-circle">
+                                <div class="media-body">
+                                    <h5>3 Order Pending</h5>
+                                    <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                </div><span class="text-muted ">April 24, 2018</span>
+                            </div>
+                            <div class="media border-bottom-1 pt-3 pb-3">
+                                <img width="35" src="./images/avatar/2.jpg" class="mr-3 rounded-circle">
+                                <div class="media-body">
+                                    <h5>Join new Manager</h5>
+                                    <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                </div><span class="text-muted ">April 24, 2018</span>
+                            </div>
+                            <div class="media border-bottom-1 pt-3 pb-3">
+                                <img width="35" src="./images/avatar/2.jpg" class="mr-3 rounded-circle">
+                                <div class="media-body">
+                                    <h5>Branch open 5 min Late</h5>
+                                    <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                </div><span class="text-muted ">April 24, 2018</span>
+                            </div>
+                            <div class="media border-bottom-1 pt-3 pb-3">
+                                <img width="35" src="./images/avatar/2.jpg" class="mr-3 rounded-circle">
+                                <div class="media-body">
+                                    <h5>New support ticket received</h5>
+                                    <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                </div><span class="text-muted ">April 24, 2018</span>
+                            </div>
+                            <div class="media pt-3 pb-3">
+                                <img width="35" src="./images/avatar/3.jpg" class="mr-3 rounded-circle">
+                                <div class="media-body">
+                                    <h5>Facebook Post 30 Comments</h5>
+                                    <p class="mb-0">I shared this on my fb wall a few months back,</p>
+                                </div><span class="text-muted ">April 24, 2018</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-sm-12 col-xxl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-0">Store Location</h4>
+                        <div id="world-map" style="height: 470px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="social-graph-wrapper widget-facebook">
+                        <span class="s-icon"><i class="fa fa-facebook"></i></span>
+                    </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Money</p>
-                                <h5 class="font-weight-bolder">
-                                    $53,000
-                                </h5>
-                                <p class="mb-0">
-                                    <span class="text-success text-sm font-weight-bolder">+55%</span>
-                                    since yesterday
-                                </p>
+                        <div class="col-6 border-right">
+                            <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                <h4 class="m-1">89k</h4>
+                                <p class="m-0">Friends</p>
                             </div>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-6">
+                            <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                <h4 class="m-1">119k</h4>
+                                <p class="m-0">Followers</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="social-graph-wrapper widget-linkedin">
+                        <span class="s-icon"><i class="fa fa-linkedin"></i></span>
+                    </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
-                                <h5 class="font-weight-bolder">
-                                    2,300
-                                </h5>
-                                <p class="mb-0">
-                                    <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                    since last week
-                                </p>
+                        <div class="col-6 border-right">
+                            <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                <h4 class="m-1">89k</h4>
+                                <p class="m-0">Friends</p>
                             </div>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-6">
+                            <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                <h4 class="m-1">119k</h4>
+                                <p class="m-0">Followers</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="social-graph-wrapper widget-googleplus">
+                        <span class="s-icon"><i class="fa fa-google-plus"></i></span>
+                    </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
-                                <h5 class="font-weight-bolder">
-                                    +3,462
-                                </h5>
-                                <p class="mb-0">
-                                    <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                    since last quarter
-                                </p>
+                        <div class="col-6 border-right">
+                            <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                <h4 class="m-1">89k</h4>
+                                <p class="m-0">Friends</p>
                             </div>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-6">
+                            <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                <h4 class="m-1">119k</h4>
+                                <p class="m-0">Followers</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-3 col-sm-6">
-            <div class="card">
-                <div class="card-body p-3">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="social-graph-wrapper widget-twitter">
+                        <span class="s-icon"><i class="fa fa-twitter"></i></span>
+                    </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
-                                <h5 class="font-weight-bolder">
-                                    $103,430
-                                </h5>
-                                <p class="mb-0">
-                                    <span class="text-success text-sm font-weight-bolder">+5%</span> than last
-                                    month
-                                </p>
+                        <div class="col-6 border-right">
+                            <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                <h4 class="m-1">89k</h4>
+                                <p class="m-0">Friends</p>
                             </div>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-6">
+                            <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                                <h4 class="m-1">119k</h4>
+                                <p class="m-0">Followers</p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-lg-7 mb-lg-0 mb-4">
-            <div class="card z-index-2 h-100">
-                <div class="card-header pb-0 pt-3 bg-transparent">
-                    <h6 class="text-capitalize">Sales overview</h6>
-                    <p class="text-sm mb-0">
-                        <i class="fa fa-arrow-up text-success"></i>
-                        <span class="font-weight-bold">4% more</span> in 2021
-                    </p>
-                </div>
-                <div class="card-body p-3">
-                    <div class="chart">
-                        <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-5">
-            <div class="card card-carousel overflow-hidden h-100 p-0">
-                <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
-                    <div class="carousel-inner border-radius-lg h-100">
-                        <div class="carousel-item h-100 active"
-                            style="background-image: url('./assets/img/carousel-1.jpg');background-size: cover;">
-                            <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                    <i class="ni ni-camera-compact text-dark opacity-10"></i>
-                                </div>
-                                <h5 class="text-white mb-1">Get started with Argon</h5>
-                                <p>There’s nothing I really wanted to do in life that I wasn’t able to get good
-                                    at.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item h-100"
-                            style="background-image: url('./assets/img/carousel-2.jpg');background-size: cover;">
-                            <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                    <i class="ni ni-bulb-61 text-dark opacity-10"></i>
-                                </div>
-                                <h5 class="text-white mb-1">Faster way to create web pages</h5>
-                                <p>That’s my skill. I’m not really specifically talented at anything except for
-                                    the ability to learn.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item h-100"
-                            style="background-image: url('./assets/img/carousel-3.jpg');background-size: cover;">
-                            <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                    <i class="ni ni-trophy text-dark opacity-10"></i>
-                                </div>
-                                <h5 class="text-white mb-1">Share with us your design tips!</h5>
-                                <p>Don’t be afraid to be wrong because you can’t learn anything from a
-                                    compliment.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next w-5 me-3" type="button"
-                        data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-lg-7 mb-lg-0 mb-4">
-            <div class="card ">
-                <div class="card-header pb-0 p-3">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="mb-2">Sales by Country</h6>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table align-items-center ">
-                        <tbody>
-                            <tr>
-                                <td class="w-30">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div>
-                                            <img src="./assets/img/icons/flags/US.png" alt="Country flag">
-                                        </div>
-                                        <div class="ms-4">
-                                            <p class="text-xs font-weight-bold mb-0">Country:</p>
-                                            <h6 class="text-sm mb-0">United States</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Sales:</p>
-                                        <h6 class="text-sm mb-0">2500</h6>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Value:</p>
-                                        <h6 class="text-sm mb-0">$230,900</h6>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-sm">
-                                    <div class="col text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Bounce:</p>
-                                        <h6 class="text-sm mb-0">29.9%</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-30">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div>
-                                            <img src="./assets/img/icons/flags/DE.png" alt="Country flag">
-                                        </div>
-                                        <div class="ms-4">
-                                            <p class="text-xs font-weight-bold mb-0">Country:</p>
-                                            <h6 class="text-sm mb-0">Germany</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Sales:</p>
-                                        <h6 class="text-sm mb-0">3.900</h6>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Value:</p>
-                                        <h6 class="text-sm mb-0">$440,000</h6>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-sm">
-                                    <div class="col text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Bounce:</p>
-                                        <h6 class="text-sm mb-0">40.22%</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-30">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div>
-                                            <img src="./assets/img/icons/flags/GB.png" alt="Country flag">
-                                        </div>
-                                        <div class="ms-4">
-                                            <p class="text-xs font-weight-bold mb-0">Country:</p>
-                                            <h6 class="text-sm mb-0">Great Britain</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Sales:</p>
-                                        <h6 class="text-sm mb-0">1.400</h6>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Value:</p>
-                                        <h6 class="text-sm mb-0">$190,700</h6>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-sm">
-                                    <div class="col text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Bounce:</p>
-                                        <h6 class="text-sm mb-0">23.44%</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-30">
-                                    <div class="d-flex px-2 py-1 align-items-center">
-                                        <div>
-                                            <img src="./assets/img/icons/flags/BR.png" alt="Country flag">
-                                        </div>
-                                        <div class="ms-4">
-                                            <p class="text-xs font-weight-bold mb-0">Country:</p>
-                                            <h6 class="text-sm mb-0">Brasil</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Sales:</p>
-                                        <h6 class="text-sm mb-0">562</h6>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Value:</p>
-                                        <h6 class="text-sm mb-0">$143,960</h6>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-sm">
-                                    <div class="col text-center">
-                                        <p class="text-xs font-weight-bold mb-0">Bounce:</p>
-                                        <h6 class="text-sm mb-0">32.14%</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-5">
-            <div class="card">
-                <div class="card-header pb-0 p-3">
-                    <h6 class="mb-0">Categories</h6>
-                </div>
-                <div class="card-body p-3">
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                            <div class="d-flex align-items-center">
-                                <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                                    <i class="ni ni-mobile-button text-white opacity-10"></i>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <h6 class="mb-1 text-dark text-sm">Devices</h6>
-                                    <span class="text-xs">250 in stock, <span class="font-weight-bold">346+
-                                            sold</span></span>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <button
-                                    class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i
-                                        class="ni ni-bold-right" aria-hidden="true"></i></button>
-                            </div>
-                        </li>
-                        <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                            <div class="d-flex align-items-center">
-                                <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                                    <i class="ni ni-tag text-white opacity-10"></i>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <h6 class="mb-1 text-dark text-sm">Tickets</h6>
-                                    <span class="text-xs">123 closed, <span class="font-weight-bold">15
-                                            open</span></span>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <button
-                                    class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i
-                                        class="ni ni-bold-right" aria-hidden="true"></i></button>
-                            </div>
-                        </li>
-                        <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                            <div class="d-flex align-items-center">
-                                <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                                    <i class="ni ni-box-2 text-white opacity-10"></i>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <h6 class="mb-1 text-dark text-sm">Error logs</h6>
-                                    <span class="text-xs">1 is active, <span class="font-weight-bold">40
-                                            closed</span></span>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <button
-                                    class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i
-                                        class="ni ni-bold-right" aria-hidden="true"></i></button>
-                            </div>
-                        </li>
-                        <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-                            <div class="d-flex align-items-center">
-                                <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                                    <i class="ni ni-satisfied text-white opacity-10"></i>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <h6 class="mb-1 text-dark text-sm">Happy users</h6>
-                                    <span class="text-xs font-weight-bold">+ 430</span>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <button
-                                    class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i
-                                        class="ni ni-bold-right" aria-hidden="true"></i></button>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -399,87 +577,21 @@
 @endsection
 
 @section('footer-plugin')
-    <script>
-        var ctx1 = document.getElementById("chart-line").getContext("2d");
-
-        var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
-        gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
-        gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
-        new Chart(ctx1, {
-            type: "line",
-            data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Mobile apps",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    pointRadius: 0,
-                    borderColor: "#5e72e4",
-                    backgroundColor: gradientStroke1,
-                    borderWidth: 3,
-                    fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                    maxBarThickness: 6
-
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            padding: 10,
-                            color: '#fbfbfb',
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#ccc',
-                            padding: 20,
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                },
-            },
-        });
-    </script>
+    <!-- Chartjs -->
+    <script src="{{ asset('plugins/chart.js/Chart.bundle.min.js') }}"></script>
+    <!-- Circle progress -->
+    <script src="{{ asset('plugins/circle-progress/circle-progress.min.js') }}"></script>
+    <!-- Datamap -->
+    <script src="{{ asset('plugins/d3v3/index.js') }}"></script>
+    <script src="{{ asset('plugins/topojson/topojson.min.js') }}"></script>
+    <script src="{{ asset('plugins/datamaps/datamaps.world.min.js') }}"></script>
+    <!-- Morrisjs -->
+    <script src="{{ asset('plugins/raphael/raphael.min.js') }}"></script>
+    <script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
+    <!-- Pignose Calender -->
+    <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('plugins/pg-calendar/js/pignose.calendar.min.js') }}"></script>
+    <!-- ChartistJS -->
+    <script src="{{ asset('plugins/chartist/js/chartist.min.js') }}"></script>
+    <script src="{{ asset('plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js') }}"></script>
 @endsection

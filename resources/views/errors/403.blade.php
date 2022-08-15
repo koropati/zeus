@@ -6,21 +6,14 @@
     </title>
 @endsection
 
-@section('body-page')
-    <h1>
-        403
-    </h1>
-    <div class="h6 mt-4">
-        Request does not specify the file name, or the directory or the file does not have the permission that allows the pages to be viewed from the web
-    </div>
-    <div>
-        Calm down you can move to the previous page
-    </div>
-@endsection
+@section('content')
+    <h1 class="error-text text-primary">403</h1>
+    <h4 class="mt-4"><i class="fa fa-thumbs-down text-danger"></i> Forbidden</h4>
+    <p>Your Request resulted in an Forbidden.</p>
+    <form class="mt-5 mb-5">
 
-@section('footer-page')
-    <div class="d-flex justify-content-between">
-        <a href="javascript:;" class="btn btn-sm btn-info mb-0 d-none d-lg-block">Back</a>
-        <a href="{{ route('dashboard') }}" class="btn btn-sm btn-dark float-right mb-0 d-none d-lg-block">Home</a>
-    </div>
+        <div class="text-center mb-4 mt-4"><a href="{{ route('dashboard') }}" class="btn btn-primary">Go
+                to Homepage</a>
+        </div>
+    </form>
 @endsection

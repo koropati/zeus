@@ -1,71 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html class="h-100" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     @yield('title-page')
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Nucleo Icons -->
-    <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
-    @yield('header-plugin')
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+
 </head>
 
-<body class="g-sidenav-show bg-gray-100">
-    <div class="position-absolute w-100 min-height-300 top-0"
-        style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
-        <span class="mask bg-primary opacity-6"></span>
+<body class="h-100">
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3"
+                    stroke-miterlimit="10" />
+            </svg>
+        </div>
     </div>
-    <div class="main-content position-relative max-height-vh-100 h-100">
-        <div class="container-fluid py-4">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <div class="card card-profile">
-                        <img src="{{ asset('assets/img/bad-feeling.svg') }}" alt="Image placeholder" class="card-img-top">
-                        <div class="row justify-content-center">
-                            <div class="col-4 col-lg-4 order-lg-2">
-                                <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0">
-                                    <a href="javascript:;">
-                                        <img src="{{ asset('assets/img/animate/confuse.gif') }}"
-                                            class="rounded-circle img-fluid border border-2 border-white">
-                                    </a>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+
+    <div class="login-form-bg h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100">
+                <div class="col-xl-6">
+                    <div class="error-content">
+                        <div class="card mb-0">
+                            <div class="card-body text-center pt-5">
+                                @yield('content')
+                                <div class="text-center">
+                                    <p>Copyright © Designed by <a
+                                            href="https://themeforest.net/user/digitalheaps">Digitalheaps</a>, Developed
+                                        by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item"><a href="javascript:void()"
+                                                class="btn btn-facebook"><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="javascript:void()"
+                                                class="btn btn-twitter"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="javascript:void()"
+                                                class="btn btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                        <li class="list-inline-item"><a href="javascript:void()"
+                                                class="btn btn-google-plus"><i class="fa fa-google-plus"></i></a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body pt-0">
-                            <div class="text-center mt-4">
-                                @yield('body-page')
-                            </div>
-                        </div>
-                        <div class="card-header text-center border-0 pt-0 pt-lg-2 pb-4 pb-lg-3">
-                            @yield('footer-page')
-                        </div>
                     </div>
                 </div>
-                <div class="col-md-4"></div>
             </div>
-
         </div>
     </div>
-    <!--   Core JS Files   -->
-    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
+
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="{{ asset('assets/plugins/common/common.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.min.js') }}"></script>
+    <script src="{{ asset('assets/js/settings.js') }}"></script>
+    <script src="{{ asset('assets/js/gleek.js') }}"></script>
+    <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script>
 </body>
 
 </html>
