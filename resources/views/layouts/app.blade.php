@@ -13,6 +13,7 @@
     @yield('header-plugin')
     <!-- Custom Stylesheet -->
     <link href="{{ asset('assets/plugins/sweetalert/css/sweetalert.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/toastr/css/toastr.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
 
@@ -47,11 +48,17 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="index.html">
-                    <b class="logo-abbr"><img src="{{ asset('assets/images/logo.png') }}" alt=""> </b>
-                    <span class="logo-compact"><img src="{{ asset('assets/images/logo-compact.png') }}"
-                            alt=""></span>
+                    <b class="logo-abbr">
+                        <h3 style="color: white" class="text-center">Z</h3>
+                        {{-- <img src="{{ asset('assets/images/logo.png') }}" alt=""> --}}
+                    </b>
+                    <span class="logo-compact">
+                        <h3 style="color: white" class="text-center">{{ config('app.name') }}</h3>
+                        {{-- <img src="{{ asset('assets/images/logo-compact.png') }}" alt=""> --}}
+                    </span>
                     <span class="brand-title">
-                        <img src="{{ asset('assets/images/logo-text.png') }}" alt="">
+                        <h3 style="color: white" class="text-center">{{ config('app.name') }}</h3>
+                        {{-- <img src="{{ asset('assets/images/logo-text.png') }}" alt=""> --}}
                     </span>
                 </a>
             </div>
@@ -105,6 +112,9 @@
     <!--**********************************
         Scripts
     ***********************************-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+
     <script src="{{ asset('assets/plugins/common/common.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.min.js') }}"></script>
     <script src="{{ asset('assets/js/settings.js') }}"></script>
@@ -112,6 +122,7 @@
     <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script>
 
     <script src="{{ asset('assets/plugins/sweetalert/js/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/toastr/js/toastr.min.js') }}"></script>
     @yield('footer-plugin')
 
     <script>
@@ -135,6 +146,86 @@
                     }
                 });
         })
+
+        function MyMessage(status, header, msg) {
+            if (status == "success") {
+                toastr.success(msg, header, {
+                    timeOut: 5e3,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                });
+            } else if (status == "warning") {
+                toastr.warning(msg, header, {
+                    timeOut: 5e3,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                });
+            } else if (status == "error") {
+                toastr.error(msg, header, {
+                    timeOut: 5e3,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                });
+            } else {
+                toastr.info(msg, header, {
+                    timeOut: 5e3,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    positionClass: "toast-top-right",
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                });
+            }
+        }
     </script>
 </body>
 

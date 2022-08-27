@@ -16,7 +16,7 @@
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
                                 <a class="text-center" href="index.html">
-                                    <h4>Reset Password</h4>
+                                    <h2>Reset Password</h2>
                                 </a>
                                 @if (session('status'))
                                     <div class="alert alert-success" role="alert">

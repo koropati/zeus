@@ -7,19 +7,13 @@
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                 </a>
             </li>
-            
-            <li class="mega-menu mega-menu-sm">
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Master Data</span>
+            @can('retrieve-users')
+            <li class="{{ request()->is('user*') ? 'active' : '' }}">
+                <a href="{{ route('user.index') }}" aria-expanded="false" class="{{ request()->is('user*') ? 'active' : '' }}">
+                    <i class="icon-user menu-icon"></i><span class="nav-text">User</span>
                 </a>
-                <ul aria-expanded="false">
-                    @can('retrieve-users')
-                    <li><a href="{{ route('user.index') }}">User</a></li>
-                    @endcan
-                    <li><a href="javascript:;">One Column</a></li>
-                    <li><a href="javascript:;">Two column</a></li>
-                </ul>
             </li>
+            @endcan
         </ul>
     </div>
 </div>

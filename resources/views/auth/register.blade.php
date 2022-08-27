@@ -46,7 +46,7 @@
                             <div class="card-body pt-5">
 
                                 <a class="text-center" href="index.html">
-                                    <h4>{{ config('app.name') }}</h4>
+                                    <h2>{{ config('app.name') }}</h2>
                                 </a>
 
                                 <form class="mt-5 mb-5 login-input" role="form" method="POST"
@@ -90,14 +90,16 @@
                                             name="password_confirmation" placeholder="Password Confirmation"
                                             aria-label="Password Confirmation" required autocomplete="new-password">
                                     </div>
-                                    <div class="form-check form-check-info text-start">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="flexCheckDefault" checked>
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            I agree the <a href="javascript:;"
-                                                class="text-dark font-weight-bolder">Terms
-                                                and Conditions</a>
-                                        </label>
+                                    <div class="form-group">
+                                        <div class="form-check form-check-info text-start">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault" checked>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                I agree the <a href="javascript:;"
+                                                    class="text-dark font-weight-bolder">Terms
+                                                    and Conditions</a>
+                                            </label>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn login-form__btn submit w-100">Sign Up</button>
                                 </form>

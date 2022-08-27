@@ -42,11 +42,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
     Route::group(['prefix' => 'app', 'middleware' =>  ['auth','verified']], function () {
             Route::get('/', 'DashboardController@dashboard')->name('dashboard');
-
-            Route::get('user/list', [UserController::class, 'getUsers'])->name('user.list');
-            Route::resource('user', UserController::class)->only([
-                'index', 'show'
-            ]);
+            Route::group(['prefix' => 'user'], function () {
+                Route::get('/', [UserController::class, 'index'])->name('user.index');
+                Route::get('list', [UserController::class, 'getUsers'])->name('user.list');
+                Route::post('store', [UserController::class, 'store'])->name('user.store');
+                Route::get('edit', [UserController::class, 'edit'])->name('user.edit');
+                Route::post('destroy', [UserController::class, 'destroy'])->name('user.destroy');
+            });
     });
 
 });

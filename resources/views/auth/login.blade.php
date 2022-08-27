@@ -44,7 +44,7 @@
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
                                 <a class="text-center" href="index.html">
-                                    <h4>{{ config('app.name') }}</h4>
+                                    <h2>{{ config('app.name') }}</h2>
                                 </a>
                                 @if (session()->has('error'))
                                     <div class="alert alert-danger">

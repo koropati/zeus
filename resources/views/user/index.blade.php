@@ -27,7 +27,15 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Data User</h4>
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h2>Data User</h2>
+                            <button type="button" class="btn mb-1 btn-success" onClick="add()">
+                                Create New
+                                <span class="btn-icon-right">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                            </button>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration yajra-datatable">
                                 <thead>
@@ -55,12 +63,10 @@
             </div>
         </div>
     </div>
+    @include('user.modal')
 @endsection
 
 @section('footer-plugin')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-
     <script src="{{ asset('assets/plugins/tables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js') }}"></script>
     {{-- <script src="{{ asset('assets/plugins/tables/js/datatable-init/datatable-basic.min.js') }}"></script> --}}

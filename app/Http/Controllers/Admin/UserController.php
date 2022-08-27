@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Permissions\Permission;
+use App\Json\JSON;
 use DataTables;
+use Hash;
 
 class UserController extends Controller
 {
@@ -32,25 +34,15 @@ class UserController extends Controller
             $data = User::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    return $actionBtn;
-                })
+                // ->addColumn('action', function($row){
+                //     $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm" data-toggle="modal" data-target=".modal-user-edit" data-id="'.$row->id.'">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                //     return $actionBtn;
+                // })
+                ->addColumn('action', 'user.action')
                 ->rawColumns(['action'])
                 ->make(true);
         }
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -59,18 +51,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
+        $response = new JSON();
+        $userID = $request->id;
+        $password_encripted = "";
+        if ($request->password){
+            if ($request->password != $request->password_confirm){
+                return $response->create("", "Password Confirmation Is Not Same!", 400);
+            }else{
+                $password_encripted = Hash::make($request->password);
+            }
+        }
+        $user = User::updateOrCreate(
+            [
+                'id' => $userID
+            ],
+            [
+                'name' => $request->name, 
+                'email' => $request->email,
+                'password' => $password_encripted,
+            ]
+        );
+        return $response->create($user, "Success Store Data!", 200);
     }
 
     /**
@@ -79,21 +80,17 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Request $request)
     {
-        //
-    }
+        $response = new JSON();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
+        $where = array('id' => $request->id);
+        $user = User::where($where)->first();
+
+        $response->setStatus(200);
+        $response->setData($user);
+        $response->setMessage("Success!");
+        return Response()->json($response, 200);
     }
 
     /**
@@ -102,8 +99,14 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Request $request)
     {
-        //
+        $response = new JSON();
+        $user = User::where('id',$request->id)->delete();
+        
+        $response->setStatus(200);
+        $response->setData($user);
+        $response->setMessage("Delete Success!");
+        return Response()->json($response, 200);
     }
 }
