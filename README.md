@@ -68,6 +68,7 @@ php artisan make:migration create_contacts_table
 
 ## Create Model
 php artisan make:model Contact
+php artisan make:model ModelName --migration
 
 ## Create Controller
 php artisan make:controller ItemController --resource --model=Item

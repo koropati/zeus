@@ -7,6 +7,7 @@
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                 </a>
             </li>
+
             @can('retrieve-users')
             <li class="{{ request()->is('user*') ? 'active' : '' }}">
                 <a href="{{ route('user.index') }}" aria-expanded="false" class="{{ request()->is('user*') ? 'active' : '' }}">
@@ -14,10 +15,19 @@
                 </a>
             </li>
             @endcan
+
             @can('retrieve-contacts')
             <li class="{{ request()->is('contact*') ? 'active' : '' }}">
                 <a href="{{ route('contact.index') }}" aria-expanded="false" class="{{ request()->is('contact*') ? 'active' : '' }}">
-                    <i class="icon-user menu-icon"></i><span class="nav-text">Contact</span>
+                    <i class="fa fa-envelope"></i><span class="nav-text">Contact</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('retrieve-devices')
+            <li class="{{ request()->is('device*') ? 'active' : '' }}">
+                <a href="{{ route('device.index') }}" aria-expanded="false" class="{{ request()->is('device*') ? 'active' : '' }}">
+                    <i class="fa fa-share-alt"></i><span class="nav-text">Device</span>
                 </a>
             </li>
             @endcan

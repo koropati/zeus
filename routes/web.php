@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Permissions\Permission;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\DeviceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,6 +60,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
                 Route::post('store', [ContactController::class, 'store'])->name('contact.store');
                 Route::get('edit', [ContactController::class, 'edit'])->name('contact.edit');
                 Route::post('destroy', [ContactController::class, 'destroy'])->name('contact.destroy');
+            });
+
+            Route::group(['prefix' => 'device'], function () {
+                Route::get('/', [DeviceController::class, 'index'])->name('device.index');
+                Route::get('list', [DeviceController::class, 'getDevices'])->name('device.list');
+                Route::post('store', [DeviceController::class, 'store'])->name('device.store');
+                Route::get('edit', [DeviceController::class, 'edit'])->name('device.edit');
+                Route::post('destroy', [DeviceController::class, 'destroy'])->name('device.destroy');
             });
     });
 

@@ -27,15 +27,21 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'delete-contacts']);
         Permission::create(['name' => 'retrieve-contacts']);
 
-        Permission::create(['name' => 'create-stunt-gun']);
-        Permission::create(['name' => 'edit-stunt-gun']);
-        Permission::create(['name' => 'delete-stunt-gun']);
-        Permission::create(['name' => 'retrieve-stunt-gun']);
+        Permission::create(['name' => 'create-my-contacts']);
+        Permission::create(['name' => 'edit-my-contacts']);
+        Permission::create(['name' => 'delete-my-contacts']);
+        Permission::create(['name' => 'retrieve-my-contacts']);
 
-        Permission::create(['name' => 'create-device-log']);
-        Permission::create(['name' => 'edit-device-log']);
-        Permission::create(['name' => 'delete-device-log']);
-        Permission::create(['name' => 'retrieve-device-log']);
+        Permission::create(['name' => 'create-devices']);
+        Permission::create(['name' => 'edit-devices']);
+        Permission::create(['name' => 'delete-devices']);
+        Permission::create(['name' => 'retrieve-devices']);
+        Permission::create(['name' => 'retrieve-my-devices']);
+
+        Permission::create(['name' => 'create-device-logs']);
+        Permission::create(['name' => 'edit-device-logs']);
+        Permission::create(['name' => 'delete-device-logs']);
+        Permission::create(['name' => 'retrieve-device-logs']);
 
         $adminRole = Role::create(['name' => 'Admin']);
         $clientRole = Role::create(['name' => 'Client']);
@@ -45,42 +51,42 @@ class RoleAndPermissionSeeder extends Seeder
             'edit-users',
             'delete-users',
             'retrieve-users',
+
             'create-contacts',
             'edit-contacts',
             'delete-contacts',
             'retrieve-contacts',
-            'create-stunt-gun',
-            'edit-stunt-gun',
-            'delete-stunt-gun',
-            'retrieve-stunt-gun',
-            'create-device-log',
-            'edit-device-log',
-            'delete-device-log',
-            'retrieve-device-log',
+
+            'create-my-contacts',
+            'edit-my-contacts',
+            'delete-my-contacts',
+            'retrieve-my-contacts',
+
+            'create-devices',
+            'edit-devices',
+            'delete-devices',
+            'retrieve-devices',
+            'retrieve-my-devices',
+
+            'create-device-logs',
+            'edit-device-logs',
+            'delete-device-logs',
+            'retrieve-device-logs',
         ]);
 
         $clientRole->givePermissionTo([
-            'create-contacts',
-            'edit-contacts',
-            'delete-contacts',
-            'retrieve-contacts',
-            'retrieve-stunt-gun',
-            'create-device-log',
-            'retrieve-device-log',
+            'create-my-contacts',
+            'edit-my-contacts',
+            'delete-my-contacts',
+            'retrieve-my-contacts',
 
+            'retrieve-my-devices',
+            'create-device-logs',
+            'retrieve-device-logs',
         ]);
 
 
         $user = User::first();
         $user->assignRole('Admin');
-
-        $user = User::first();
-        $user->givePermissionTo('create-users');
-        $user->givePermissionTo('edit-users');
-        $user->givePermissionTo('delete-users');
-        $user->givePermissionTo('create-contacts');
-        $user->givePermissionTo('edit-contacts');
-        $user->givePermissionTo('delete-contacts');
-
     }
 }
