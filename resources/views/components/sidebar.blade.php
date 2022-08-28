@@ -14,6 +14,13 @@
                 </a>
             </li>
             @endcan
+            @can('retrieve-contacts')
+            <li class="{{ request()->is('contact*') ? 'active' : '' }}">
+                <a href="{{ route('contact.index') }}" aria-expanded="false" class="{{ request()->is('contact*') ? 'active' : '' }}">
+                    <i class="icon-user menu-icon"></i><span class="nav-text">Contact</span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </div>
 </div>

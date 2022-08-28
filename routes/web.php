@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Permissions\Permission;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,12 +43,22 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
     Route::group(['prefix' => 'app', 'middleware' =>  ['auth','verified']], function () {
             Route::get('/', 'DashboardController@dashboard')->name('dashboard');
+
             Route::group(['prefix' => 'user'], function () {
                 Route::get('/', [UserController::class, 'index'])->name('user.index');
                 Route::get('list', [UserController::class, 'getUsers'])->name('user.list');
+                Route::get('drop-down', [UserController::class, 'dropDownUser'])->name('user.drop-down');
                 Route::post('store', [UserController::class, 'store'])->name('user.store');
                 Route::get('edit', [UserController::class, 'edit'])->name('user.edit');
                 Route::post('destroy', [UserController::class, 'destroy'])->name('user.destroy');
+            });
+
+            Route::group(['prefix' => 'contact'], function () {
+                Route::get('/', [ContactController::class, 'index'])->name('contact.index');
+                Route::get('list', [ContactController::class, 'getContacts'])->name('contact.list');
+                Route::post('store', [ContactController::class, 'store'])->name('contact.store');
+                Route::get('edit', [ContactController::class, 'edit'])->name('contact.edit');
+                Route::post('destroy', [ContactController::class, 'destroy'])->name('contact.destroy');
             });
     });
 

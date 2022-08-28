@@ -63,9 +63,15 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
+## Create migrations
+php artisan make:migration create_contacts_table
+
+## Create Model
+php artisan make:model Contact
 
 ## Create Controller
 php artisan make:controller ItemController --resource --model=Item
+php artisan make:controller Admin/ContactController --model=Contact
 
 ## Create Seeder
 php artisan make:seeder UserSeeder

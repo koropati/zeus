@@ -39,9 +39,9 @@
         $('#user-password-confirm').val("");
 
         if (res != "") {
-            $('#user-id').val(res.response.data.id);
-            $('#user-name').val(res.response.data.name);
-            $('#user-email').val(res.response.data.email);
+            $('#user-id').val(res.data.id);
+            $('#user-name').val(res.data.name);
+            $('#user-email').val(res.data.email);
         }
 
         if (condition == "detail") {

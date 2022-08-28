@@ -43,6 +43,19 @@ class UserController extends Controller
                 ->make(true);
         }
     }
+
+    public function dropDownUser(Request $request){
+        $data = [];
+        if($request->filled('q')){
+            $data = User::select("name", "id")
+                        ->where('name', 'LIKE', '%'. $request->get('q'). '%')
+                        ->get();
+        }else{
+            $data = User::all();
+        }
+    
+        return Response()->json($data,200);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -71,7 +84,7 @@ class UserController extends Controller
                 'password' => $password_encripted,
             ]
         );
-        return $response->create($user, "Success Store Data!", 200);
+        return $response->create($user, "Success Store Data", 200);
     }
 
     /**
@@ -87,10 +100,7 @@ class UserController extends Controller
         $where = array('id' => $request->id);
         $user = User::where($where)->first();
 
-        $response->setStatus(200);
-        $response->setData($user);
-        $response->setMessage("Success!");
-        return Response()->json($response, 200);
+        return $response->create($user, "Success", 200);
     }
 
     /**
@@ -104,9 +114,6 @@ class UserController extends Controller
         $response = new JSON();
         $user = User::where('id',$request->id)->delete();
         
-        $response->setStatus(200);
-        $response->setData($user);
-        $response->setMessage("Delete Success!");
-        return Response()->json($response, 200);
+        return $response->create($user, "Delete Success", 200);
     }
 }
