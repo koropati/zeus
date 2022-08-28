@@ -5,6 +5,7 @@ use App\Permissions\Permission;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DeviceController;
+use App\Http\Controllers\Admin\DeviceLogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,9 +66,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
             Route::group(['prefix' => 'device'], function () {
                 Route::get('/', [DeviceController::class, 'index'])->name('device.index');
                 Route::get('list', [DeviceController::class, 'getDevices'])->name('device.list');
+                Route::get('drop-down', [DeviceController::class, 'dropDownDevice'])->name('device.drop-down');
                 Route::post('store', [DeviceController::class, 'store'])->name('device.store');
                 Route::get('edit', [DeviceController::class, 'edit'])->name('device.edit');
                 Route::post('destroy', [DeviceController::class, 'destroy'])->name('device.destroy');
+            });
+
+            Route::group(['prefix' => 'device-log'], function () {
+                Route::get('/', [DeviceLogController::class, 'index'])->name('device-log.index');
+                Route::get('list', [DeviceLogController::class, 'getDevices'])->name('device-log.list');
+                Route::post('store', [DeviceLogController::class, 'store'])->name('device-log.store');
+                Route::get('edit', [DeviceLogController::class, 'edit'])->name('device-log.edit');
+                Route::post('destroy', [DeviceLogController::class, 'destroy'])->name('device-log.destroy');
             });
     });
 

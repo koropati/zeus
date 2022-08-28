@@ -23,4 +23,9 @@ class Device extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function device_logs()
+    {
+        return $this->hasMany(DeviceLog::class);
+    }
 }

@@ -31,6 +31,14 @@
                 </a>
             </li>
             @endcan
+
+            @can('retrieve-device-logs')
+            <li class="{{ request()->is('device-log*') ? 'active' : '' }}">
+                <a href="{{ route('device-log.index') }}" aria-expanded="false" class="{{ request()->is('device-log*') ? 'active' : '' }}">
+                    <i class="fa fa-share-alt"></i><span class="nav-text">Device Log</span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </div>
 </div>

@@ -59,6 +59,19 @@ class DeviceController extends Controller
         }
     }
 
+    public function dropDownDevice(Request $request){
+        $data = [];
+        if($request->filled('q')){
+            $data = Device::select("uuid", "type", "id")
+                        ->where('type', 'LIKE', '%'. $request->get('q'). '%')
+                        ->get();
+        }else{
+            $data = Device::all();
+        }
+    
+        return Response()->json($data,200);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
