@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Permissions\Permission;
 use App\Json\JSON;
 use DataTables;
+use Hash;
 
 class DeviceLogController extends Controller
 {
@@ -96,5 +97,17 @@ class DeviceLogController extends Controller
         $response = new JSON();
         $data = DeviceLog::where('id',$request->id)->delete();
         return $response->create($data, "Delete Success", 200);
+    }
+
+    public function destroyAll(Request $request)
+    {
+        $response = new JSON();
+
+        if ( !Hash::check($request->password, $this->user()->password) ) {
+            $data = DeviceLog::truncate();
+            return $response->create($data, "Delete Success", 200);
+        }else{
+            return $response->create("", "Invalid Credential", 400);
+        }
     }
 }

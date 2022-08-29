@@ -78,6 +78,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
                 Route::post('store', [DeviceLogController::class, 'store'])->name('device-log.store');
                 Route::get('edit', [DeviceLogController::class, 'edit'])->name('device-log.edit');
                 Route::post('destroy', [DeviceLogController::class, 'destroy'])->name('device-log.destroy');
+                Route::post('destroy-all', [DeviceLogController::class, 'destroyAll'])->name('device-log.destroy-all');
             });
     });
 

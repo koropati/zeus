@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('device_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('device_id')->constrained('devices');
+            $table->unsignedBigInteger('device_id')->nullable();
+            $table->foreign('device_id')->references('id')->on('devices')->nullOnDelete();
             $table->uuid('uuid')->unique();
             $table->ipAddress('ip_address');
             $table->string('status');
