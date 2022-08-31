@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DeviceLog;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Permissions\Permission;
@@ -21,7 +22,7 @@ class DeviceLogController extends Controller
     public function index()
     {
         if (!auth()->user()->can(Permission::CAN_RETRIEVE_DEVICE_LOGS)) {
-            return redirect('login');
+            abort(403);
         }
         return view('device-log.index');
     }
@@ -29,7 +30,7 @@ class DeviceLogController extends Controller
     public function getDeviceLogs(Request $request)
     {
         if (!auth()->user()->can(Permission::CAN_RETRIEVE_DEVICE_LOGS)) {
-            return redirect('login');
+            abort(403);
         }
         if ($request->ajax()) {
             $data = DeviceLog::with('device')->latest()->get();
@@ -37,7 +38,12 @@ class DeviceLogController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', 'device-log.action')
                 ->addColumn('device', function(DeviceLog $device_log){
-                    return $device_log->device->uuid;
+                    if($device_log){
+                        return $device_log->device->uuid;
+                    }else{
+                        return "NONE";
+                    }
+                    
                 })
                 ->rawColumns(['action', 'device'])
                 ->make(true);
@@ -52,6 +58,9 @@ class DeviceLogController extends Controller
      */
     public function store(Request $request)
     {
+        if (!auth()->user()->can(Permission::CAN_CREATE_DEVICE_LOGS)) {
+            abort(403);
+        }
         $response = new JSON();
         $dataID = $request->id;
 
@@ -79,6 +88,9 @@ class DeviceLogController extends Controller
      */
     public function edit(Request $request)
     {
+        if (!auth()->user()->can(Permission::CAN_UPDATE_DEVICE_LOGS)) {
+            abort(403);
+        }
         $response = new JSON();
         $where = array('id' => $request->id);
         $data = DeviceLog::with('device')->where($where)->first();
@@ -94,6 +106,9 @@ class DeviceLogController extends Controller
      */
     public function destroy(Request $request)
     {
+        if (!auth()->user()->can(Permission::CAN_DELETE_DEVICE_LOGS)) {
+            abort(403);
+        }
         $response = new JSON();
         $data = DeviceLog::where('id',$request->id)->delete();
         return $response->create($data, "Delete Success", 200);
@@ -101,9 +116,12 @@ class DeviceLogController extends Controller
 
     public function destroyAll(Request $request)
     {
+        if (!auth()->user()->can(Permission::CAN_DELETE_DEVICE_LOGS)) {
+            abort(403);
+        }
         $response = new JSON();
-
-        if ( !Hash::check($request->password, $this->user()->password) ) {
+        $user = User::where('id', auth()->user()->id)->first();
+        if ( !Hash::check($request->password, $user->password) ) {
             $data = DeviceLog::truncate();
             return $response->create($data, "Delete Success", 200);
         }else{

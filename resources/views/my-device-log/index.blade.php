@@ -2,7 +2,7 @@
 
 @section('title-page')
     <title>
-        Master Data Device - {{ config('app.name') }}
+        Log Device - {{$device->uuid}}
     </title>
 @endsection
 
@@ -10,7 +10,6 @@
     <!-- Custom Stylesheet -->
     <link href="{{ asset('assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/plugins/select2/css/select2-bootstrap.css') }}" rel="stylesheet">
 
     <!-- Custom Stylesheet -->
     <link href="{{ asset('assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet">
@@ -31,8 +30,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Master Data</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Device</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">My Log Device</a></li>
             </ol>
         </div>
     </div>
@@ -43,24 +41,19 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h2>Data Device</h2>
-                            <button type="button" class="btn mb-1 btn-success" onClick="add()" id="create-new-device">
-                                Create New
-                                <span class="btn-icon-right">
-                                    <i class="fa fa-pencil"></i>
-                                </span>
-                            </button>
+                            <h2>Log Device {{$device->device_type}}</h2>
+                            <code>[{{$device->uuid}}]</code>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration yajra-datatable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Type</th>
-                                        <th>API KEY</th>
-                                        <th>Expired</th>
+                                        <th>Device ID</th>
+                                        <th>IP Address</th>
                                         <th>Status</th>
-                                        <th>Owner</th>
+                                        <th>Code</th>
+                                        <th>Created At</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -69,11 +62,11 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>Type</th>
-                                        <th>API KEY</th>
-                                        <th>Expired</th>
+                                        <th>Device ID</th>
+                                        <th>IP Address</th>
                                         <th>Status</th>
-                                        <th>Owner</th>
+                                        <th>Code</th>
+                                        <th>Created At</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -84,7 +77,7 @@
             </div>
         </div>
     </div>
-    @include('device.modal')
+    @include('my-device-log.modal')
 @endsection
 
 @section('footer-plugin')
@@ -106,5 +99,5 @@
     <script src="{{ asset('assets/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
-    @include('device.js')
+    @include('my-device-log.js')
 @endsection

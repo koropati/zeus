@@ -9,10 +9,7 @@
             <div class="modal-body" id="contact-modal-body">
                 <form id="contact-form">
                     <input type="hidden" class="form-control" id="contact-id" name="id">
-                    <div class="form-group">
-                        <label for="contact-owner" class="col-form-label">Owner:</label>
-                        <select class="form-control" id="contact-owner" style="width:100%;" name="user_id"></select>
-                    </div>
+                    <input type="hidden" class="form-control" id="contact-user-id" name="user_id" value="{{ auth()->user()->id }}">
                     <div class="form-group">
                         <label for="contact-name" class="col-form-label">Name:</label>
                         <input type="text" class="form-control" id="contact-name" name="name">

@@ -30,6 +30,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Master Data</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Log Device</a></li>
             </ol>
         </div>

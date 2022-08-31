@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Device;
@@ -10,7 +10,7 @@ use App\Permissions\Permission;
 use App\Json\JSON;
 use DataTables;
 
-class DeviceController extends Controller
+class MyDeviceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,22 +19,23 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        if (!auth()->user()->can(Permission::CAN_RETRIEVE_DEVICES)) {
+        if (!auth()->user()->can(Permission::CAN_RETRIEVE_MY_DEVICES)) {
             abort(403);
         }
-        return view('device.index');
+        return view('my-device.index');
     }
 
     public function getDevices(Request $request)
     {
-        if (!auth()->user()->can(Permission::CAN_RETRIEVE_DEVICES)) {
+        if (!auth()->user()->can(Permission::CAN_RETRIEVE_MY_DEVICES)) {
             abort(403);
         }
         if ($request->ajax()) {
-            $data = Device::with('user')->latest()->get();
+            $where = array('user_id' => auth()->user()->id);
+            $data = Device::with('user')->where($where)->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', 'device.action')
+                ->addColumn('action', 'my-device.action')
                 ->addColumn('owner', function(Device $device){
                     return $device->user->name;
                 })
@@ -60,12 +61,13 @@ class DeviceController extends Controller
     }
 
     public function dropDownDevice(Request $request){
-        if (!auth()->user()->can(Permission::CAN_RETRIEVE_DEVICES)) {
+        if (!auth()->user()->can(Permission::CAN_RETRIEVE_MY_DEVICES)) {
             abort(403);
         }
         $data = [];
         if($request->filled('q')){
             $data = Device::select("uuid", "type", "id")
+                        ->where('user_id', '=', auth()->user()->id)
                         ->where('type', 'LIKE', '%'. $request->get('q'). '%')
                         ->get();
         }else{
@@ -76,37 +78,6 @@ class DeviceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        if (!auth()->user()->can(Permission::CAN_CREATE_DEVICES)) {
-            abort(403);
-        }
-        $response = new JSON();
-        $dataID = $request->id;
-
-        $data = Device::updateOrCreate(
-            [
-                'id' => $dataID
-            ],
-            [
-                'user_id' => $request->user_id, 
-                'device_type' => $request->device_type,
-                'uuid' => $request->uuid,
-                'api_key' => $request->api_key,
-                'expired_at' => $request->expired_at,
-                'is_active' => $request->is_active ? $request->is_active : '0',
-                'description' => $request->description,
-            ]
-        );
-        return $response->create($data, "Success Store Data!", 200);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Device  $device
@@ -114,29 +85,13 @@ class DeviceController extends Controller
      */
     public function edit(Request $request)
     {
-        if (!auth()->user()->can(Permission::CAN_UPDATE_DEVICES)) {
+        if (!auth()->user()->can(Permission::CAN_RETRIEVE_MY_DEVICES)) {
             abort(403);
         }
         $response = new JSON();
-        $where = array('id' => $request->id);
-        $data = Device::with('user')->where($where)->first();
+        $itemId = array('id' => $request->id);
+        $userIdLogin = array('user_id' => auth()->user()->id);
+        $data = Device::with('user')->where($itemId)->where($userIdLogin)->first();
         return $response->create($data, "Success", 200);
-    }
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Device  $device
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request)
-    {
-        if (!auth()->user()->can(Permission::CAN_DELETE_DEVICES)) {
-            abort(403);
-        }
-        $response = new JSON();
-        $data = Device::where('id',$request->id)->delete();
-        return $response->create($data, "Delete Success", 200);
     }
 }

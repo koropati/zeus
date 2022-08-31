@@ -10,7 +10,7 @@
         table = $('.yajra-datatable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('contact.list') }}",
+            ajax: "{{ route('my-contact.list') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
@@ -32,41 +32,12 @@
                     name: 'status'
                 },
                 {
-                    data: 'owner',
-                    name: 'owner'
-                },
-                {
                     data: 'action',
                     name: 'action',
                     orderable: true,
                     searchable: true
                 },
             ]
-        });
-
-        var urlUserDropDown = "{{ route('user.drop-down') }}";
-
-        $("#contact-owner").select2({
-            theme: "bootstrap",
-            dropdownParent: $("#contact-modal"),
-            placeholder: 'Select an user',
-            ajax: {
-                url: urlUserDropDown,
-                dataType: 'json',
-                delay: 250,
-                processResults: function(data) {
-                    return {
-                        results: $.map(data, function(item) {
-                            return {
-                                text: item.name,
-                                slug: item.email,
-                                id: item.id
-                            }
-                        })
-                    };
-                },
-                cache: true
-            }
         });
 
         $('#contact-is-emergency').change(function() {
@@ -85,16 +56,6 @@
             $('#contact-phone-number').val(res.data.phone_number);
             $('#contact-address').val(res.data.address);
             $('#contact-is-emergency').val(res.data.is_emergency);
-
-            // Set the value, creating a new option if necessary
-            if ($('#contact-owner').find("option[value='" + res.data.user_id + "']").length) {
-                $('#contact-owner').val(res.data.user_id).trigger('change');
-            } else {
-                // Create a DOM Option and pre-select by default
-                var newOption = new Option(res.data.user.name, res.data.user_id, true, true);
-                // Append it to the select
-                $('#contact-owner').append(newOption).trigger('change');
-            }
 
             if (res.data.is_emergency == 1) {
                 $('#contact-is-emergency').prop('checked', true);
@@ -115,7 +76,6 @@
             $('#contact-phone-number').attr("disabled", true);
             $('#contact-address').attr("disabled", true);
             $('#contact-is-emergency').attr("disabled", true);
-            $('#contact-owner').attr("disabled", true);
         } else if (condition == "edit") {
             $("#contact-modal-submit").html("Submit");
             $('#contact-modal-title').html("Edit Contact");
@@ -132,9 +92,7 @@
             $('#contact-phone-number').attr("disabled", false);
             $('#contact-address').attr("disabled", false);
             $('#contact-is-emergency').attr("disabled", false);
-            $('#contact-owner').attr("disabled", false);
         } else if (condition == "create") {
-            $('#select2-contact-owner-container').html("");
             $('#contact-modal-title').html("Add Contact");
             $('#contact-id').val('');
 
@@ -148,7 +106,6 @@
             $('#contact-phone-number').attr("disabled", false);
             $('#contact-address').attr("disabled", false);
             $('#contact-is-emergency').attr("disabled", false);
-            $('#contact-owner').attr("disabled", false);
         }
     }
 
@@ -162,7 +119,7 @@
     function detailFunc(id) {
         $.ajax({
             type: "GET",
-            url: "{{ route('contact.edit') }}",
+            url: "{{ route('my-contact.edit') }}",
             data: {
                 id: id
             },
@@ -181,7 +138,7 @@
     function editFunc(id) {
         $.ajax({
             type: "GET",
-            url: "{{ route('contact.edit') }}",
+            url: "{{ route('my-contact.edit') }}",
             data: {
                 id: id
             },
@@ -215,7 +172,7 @@
                     // ajax
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('contact.destroy') }}",
+                        url: "{{ route('my-contact.destroy') }}",
                         data: {
                             id: id
                         },
@@ -240,7 +197,7 @@
         console.log("DATA", formData);
         $.ajax({
             type: 'POST',
-            url: "{{ route('contact.store') }}",
+            url: "{{ route('my-contact.store') }}",
             data: formData,
             cache: false,
             contentType: false,

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\DeviceLog;
 use App\Models\Device;
+use App\Models\DeviceLog;
 use Illuminate\Http\Request;
 
 use App\Permissions\Permission;
@@ -12,7 +12,7 @@ use App\Json\JSON;
 
 use Validator;
 
-class ApiDeviceLogController extends Controller
+class ApiDeviceController extends Controller
 {
     /**
      * Store a newly created resource in storage.
@@ -27,7 +27,7 @@ class ApiDeviceLogController extends Controller
         $input = $request->all();
     
         $validator = Validator::make($input, [
-            'device_id' => 'required',
+            'api_key' => 'required',
             'ip_address' => 'required',
             'status' => 'required',
             'code' => 'required'
@@ -37,11 +37,11 @@ class ApiDeviceLogController extends Controller
             return $response->create("", $validator->errors(), 400);
         }
 
-        $where = array('id' => $input["device_id"]);
+        $where = array('api_key' => $input["api_key"]);
         $dataDevice = Device::with('user')->where($where)->first();
 
         if($dataDevice == null){
-            return $response->create("", "Device ID Not Found!", 400);
+            return $response->create("", "Invalid Credentials", 400);
         }
 
         // $data = DeviceLog::create($input);

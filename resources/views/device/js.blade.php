@@ -1,5 +1,42 @@
 <script type="text/javascript">
     var table;
+
+    function getMillis() {
+        const d = new Date();
+        return String(d.getTime());
+    }
+
+    const shuffle = str => [...str].sort(() => Math.random() - .5).join('');
+
+    function makeID(length) {
+        var result = '';
+        var characters = shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789' + getMillis());
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));
+        }
+        return result;
+    }
+
+
+    function generateUUID() {
+        var d = new Date().getTime();
+        if (window.performance && typeof window.performance.now === "function") {
+            d += performance.now();
+        }
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = (d + Math.random() * 16) % 16 | 0;
+            d = Math.floor(d / 16);
+            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+        return uuid;
+    }
+
+    function generateAPIKey() {
+        return makeID(8) + "-" + makeID(8) + "-" + makeID(8);
+    };
+
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -51,6 +88,7 @@
         var urlUserDropDown = "{{ route('user.drop-down') }}";
 
         $("#device-owner").select2({
+            theme: "bootstrap",
             dropdownParent: $("#device-modal"),
             placeholder: 'Select an user',
             ajax: {
@@ -75,6 +113,14 @@
         $('#device-is-active').change(function() {
             cb = $(this);
             cb.val(cb.prop('checked') ? 1 : 0);
+        });
+
+        $('#create-new-device').on('click', function() {
+            let myUUID = generateUUID();
+            let myAPIKey = generateAPIKey();
+
+            $('#device-uuid').val(myUUID);
+            $('#device-api-key').val(myAPIKey);
         });
 
         $('#generate-uuid').on('click', function() {
@@ -284,40 +330,4 @@
             }
         });
     });
-
-    function getMillis() {
-        const d = new Date();
-        return String(d.getTime());
-    }
-
-    const shuffle = str => [...str].sort(()=>Math.random()-.5).join('');
-
-    function makeID(length) {
-        var result = '';
-        var characters = shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789' + getMillis());
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() *
-                charactersLength));
-        }
-        return result;
-    }
-
-
-    function generateUUID() {
-        var d = new Date().getTime();
-        if (window.performance && typeof window.performance.now === "function") {
-            d += performance.now();
-        }
-        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = (d + Math.random() * 16) % 16 | 0;
-            d = Math.floor(d / 16);
-            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-        });
-        return uuid;
-    }
-
-    function generateAPIKey() {
-        return makeID(8)+"-"+makeID(8)+"-"+makeID(8);
-    };
 </script>

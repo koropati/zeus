@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DeviceController;
 use App\Http\Controllers\Admin\DeviceLogController;
+use App\Http\Controllers\User\MyContactController;
+use App\Http\Controllers\User\MyDeviceController;
+use App\Http\Controllers\User\MyDeviceLogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +49,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::group(['prefix' => 'app', 'middleware' =>  ['auth','verified']], function () {
             Route::get('/', 'DashboardController@dashboard')->name('dashboard');
 
+            // ADMIN ROUTE
             Route::group(['prefix' => 'user'], function () {
                 Route::get('/', [UserController::class, 'index'])->name('user.index');
                 Route::get('list', [UserController::class, 'getUsers'])->name('user.list');
@@ -74,11 +78,37 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
             Route::group(['prefix' => 'device-log'], function () {
                 Route::get('/', [DeviceLogController::class, 'index'])->name('device-log.index');
-                Route::get('list', [DeviceLogController::class, 'getDevices'])->name('device-log.list');
+                Route::get('list', [DeviceLogController::class, 'getDeviceLogs'])->name('device-log.list');
                 Route::post('store', [DeviceLogController::class, 'store'])->name('device-log.store');
                 Route::get('edit', [DeviceLogController::class, 'edit'])->name('device-log.edit');
                 Route::post('destroy', [DeviceLogController::class, 'destroy'])->name('device-log.destroy');
                 Route::post('destroy-all', [DeviceLogController::class, 'destroyAll'])->name('device-log.destroy-all');
+            });
+
+
+            // USER ROUTE
+            Route::group(['prefix' => 'my'], function () {
+                Route::group(['prefix' => 'contact'], function () {
+                    Route::get('/', [MyContactController::class, 'index'])->name('my-contact.index');
+                    Route::get('list', [MyContactController::class, 'getContacts'])->name('my-contact.list');
+                    Route::post('store', [MyContactController::class, 'store'])->name('my-contact.store');
+                    Route::get('edit', [MyContactController::class, 'edit'])->name('my-contact.edit');
+                    Route::post('destroy', [MyContactController::class, 'destroy'])->name('my-contact.destroy');
+                });
+
+                Route::group(['prefix' => 'device'], function () {
+                    Route::get('/', [MyDeviceController::class, 'index'])->name('my-device.index');
+                    Route::get('list', [MyDeviceController::class, 'getDevices'])->name('my-device.list');
+                    Route::get('drop-down', [MyDeviceController::class, 'dropDownDevice'])->name('my-device.drop-down');
+                    Route::get('edit', [MyDeviceController::class, 'edit'])->name('my-device.edit');
+                });
+
+                Route::group(['prefix' => 'device-log'], function () {
+                    Route::get('/', [MyDeviceLogController::class, 'index'])->name('my-device-log.index');
+                    Route::get('list', [MyDeviceLogController::class, 'getDeviceLogs'])->name('my-device-log.list');
+                    Route::get('edit', [MyDeviceLogController::class, 'edit'])->name('my-device-log.edit');
+                });
+
             });
     });
 

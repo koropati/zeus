@@ -32,8 +32,10 @@
                         <label for="user-password-confirm" class="col-form-label">Password Confirmation:</label>
                         <input type="password" class="form-control" id="user-password-confirm" name="password_confirm">
                     </div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="user-modal-submit">Submit</button>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="user-modal-submit">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>

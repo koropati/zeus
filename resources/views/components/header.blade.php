@@ -160,7 +160,7 @@
                             <ul>
                                 <li>
                                     <a href="app-profile.html"><i class="icon-user"></i>
-                                        <span>Profile</span></a>
+                                        <span>{{ auth()->user()->name }}</span></a>
                                 </li>
                                 <li>
                                     <a href="email-inbox.html"><i class="icon-envelope-open"></i>

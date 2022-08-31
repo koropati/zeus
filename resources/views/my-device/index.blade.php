@@ -2,7 +2,7 @@
 
 @section('title-page')
     <title>
-        Master Data Device - {{ config('app.name') }}
+        My Device - {{ config('app.name') }}
     </title>
 @endsection
 
@@ -31,8 +31,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Master Data</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Device</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">My Device</a></li>
             </ol>
         </div>
     </div>
@@ -43,13 +42,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h2>Data Device</h2>
-                            <button type="button" class="btn mb-1 btn-success" onClick="add()" id="create-new-device">
-                                Create New
-                                <span class="btn-icon-right">
-                                    <i class="fa fa-pencil"></i>
-                                </span>
-                            </button>
+                            <h2>My Device</h2>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration yajra-datatable">
@@ -60,7 +53,6 @@
                                         <th>API KEY</th>
                                         <th>Expired</th>
                                         <th>Status</th>
-                                        <th>Owner</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -73,7 +65,6 @@
                                         <th>API KEY</th>
                                         <th>Expired</th>
                                         <th>Status</th>
-                                        <th>Owner</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -84,7 +75,7 @@
             </div>
         </div>
     </div>
-    @include('device.modal')
+    @include('my-device.modal')
 @endsection
 
 @section('footer-plugin')
@@ -106,5 +97,5 @@
     <script src="{{ asset('assets/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
-    @include('device.js')
+    @include('my-device.js')
 @endsection

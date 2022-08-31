@@ -20,7 +20,7 @@ class UserController extends Controller
     public function index()
     {
         if (!auth()->user()->can(Permission::CAN_RETRIEVE_USERS)) {
-            return redirect('login');
+            abort(403);
         }
         return view('user.index');
     }
@@ -28,7 +28,7 @@ class UserController extends Controller
     public function getUsers(Request $request)
     {
         if (!auth()->user()->can(Permission::CAN_RETRIEVE_USERS)) {
-            return redirect('login');
+            abort(403);
         }
         if ($request->ajax()) {
             $data = User::latest()->get();
@@ -45,6 +45,9 @@ class UserController extends Controller
     }
 
     public function dropDownUser(Request $request){
+        if (!auth()->user()->can(Permission::CAN_RETRIEVE_USERS)) {
+            abort(403);
+        }
         $data = [];
         if($request->filled('q')){
             $data = User::select("name", "id")
@@ -64,6 +67,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if (!auth()->user()->can(Permission::CAN_CREATE_USERS)) {
+            abort(403);
+        }
         $response = new JSON();
         $userID = $request->id;
         $password_encripted = "";
@@ -95,6 +101,9 @@ class UserController extends Controller
      */
     public function edit(Request $request)
     {
+        if (!auth()->user()->can(Permission::CAN_UPDATE_USERS)) {
+            abort(403);
+        }
         $response = new JSON();
 
         $where = array('id' => $request->id);
@@ -111,6 +120,9 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
+        if (!auth()->user()->can(Permission::CAN_DELETE_USERS)) {
+            abort(403);
+        }
         $response = new JSON();
         $user = User::where('id',$request->id)->delete();
         

@@ -24,16 +24,16 @@
                     name: 'ip_address'
                 },
                 {
-                    data: 'created_at',
-                    name: 'created_at'
-                },
-                {
                     data: 'status',
                     name: 'status'
                 },
                 {
                     data: 'code',
                     name: 'code'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
                 },
                 {
                     data: 'action',
@@ -51,7 +51,7 @@
         if (res != "") {
             $('#device-log-id').val(res.data.id);
             $('#device-log-device').val(res.data.device.uuid);
-            $('#device-log-ip-address').val(res.data.device.uuid);
+            $('#device-log-ip-address').val(res.data.ip_address);
             $('#device-log-uuid').val(res.data.uuid);
             $('#device-log-status').val(res.data.status);
             $('#device-log-code').val(res.data.code);
@@ -139,7 +139,7 @@
             type: "POST",
             url: "{{ route('device-log.destroy') }}",
             data: {
-                password: $("#device-log-password").val();
+                password: $("#device-log-password").val()
             },
             dataType: 'json',
             success: function(data) {

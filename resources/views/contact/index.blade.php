@@ -10,6 +10,7 @@
     <!-- Custom Stylesheet -->
     <link href="{{ asset('assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/select2/css/select2-bootstrap.css') }}" rel="stylesheet">
 @endsection
 
 
@@ -18,6 +19,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Master Data</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Contact</a></li>
             </ol>
         </div>

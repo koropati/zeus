@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
@@ -10,7 +10,7 @@ use App\Permissions\Permission;
 use App\Json\JSON;
 use DataTables;
 
-class ContactController extends Controller
+class MyContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,22 +19,23 @@ class ContactController extends Controller
      */
     public function index()
     {
-        if (!auth()->user()->can(Permission::CAN_RETRIEVE_CONTACTS)) {
+        if (!auth()->user()->can(Permission::CAN_RETRIEVE_MY_CONTACTS)) {
             abort(403);
         }
-        return view('contact.index');
+        return view('my-contact.index');
     }
 
     public function getContacts(Request $request)
     {
-        if (!auth()->user()->can(Permission::CAN_RETRIEVE_CONTACTS)) {
+        if (!auth()->user()->can(Permission::CAN_RETRIEVE_MY_CONTACTS)) {
             abort(403);
         }
         if ($request->ajax()) {
-            $data = Contact::with('user')->latest()->get();
+            $where = array('user_id' => auth()->user()->id);
+            $data = Contact::with('user')->where($where)->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', 'contact.action')
+                ->addColumn('action', 'my-contact.action')
                 ->addColumn('owner', function(Contact $contact){
                     return $contact->user->name;
                 })
@@ -58,7 +59,7 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        if (!auth()->user()->can(Permission::CAN_CREATE_CONTACTS)) {
+        if (!auth()->user()->can(Permission::CAN_CREATE_MY_CONTACTS)) {
             abort(403);
         }
         $response = new JSON();
@@ -73,7 +74,7 @@ class ContactController extends Controller
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
                 'address' => $request->address,
-                'user_id' => $request->user_id,
+                'user_id' => auth()->user()->id,
                 'is_emergency' => $request->is_emergency ? $request->is_emergency : '0',
             ]
         );
@@ -88,13 +89,15 @@ class ContactController extends Controller
      */
     public function edit(Request $request)
     {
-        if (!auth()->user()->can(Permission::CAN_UPDATE_CONTACTS)) {
+        if (!auth()->user()->can(Permission::CAN_UPDATE_MY_CONTACTS)) {
             abort(403);
         }
         $response = new JSON();
 
-        $where = array('id' => $request->id);
-        $data = Contact::with('user')->where($where)->first();
+        $itemId = array('id' => $request->id);
+        $userIdLogin = array('user_id' => auth()->user()->id);
+
+        $data = Contact::with('user')->where($itemId)->where($userIdLogin)->first();
 
         return $response->create($data, "Success", 200);
     }
@@ -108,11 +111,13 @@ class ContactController extends Controller
      */
     public function destroy(Request $request)
     {
-        if (!auth()->user()->can(Permission::CAN_DELETE_CONTACTS)) {
+        if (!auth()->user()->can(Permission::CAN_DELETE_MY_CONTACTS)) {
             abort(403);
         }
         $response = new JSON();
-        $data = Contact::where('id',$request->id)->delete();
+        $itemId = array('id' => $request->id);
+        $userIdLogin = array('user_id' => auth()->user()->id);
+        $data = Contact::where($itemId)->where($userIdLogin)->delete();
         
         return $response->create($data, "Delete Success", 200);
     }

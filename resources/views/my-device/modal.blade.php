@@ -10,11 +10,6 @@
                 <form id="device-form">
                     <input type="hidden" class="form-control" id="device-id" name="id">
                     <div class="form-group">
-                        <label for="device-owner" class="col-form-label">Owner:</label>
-                        <select class="form-control input-lg" id="device-owner" style="width:100%;" name="user_id"
-                            placeholder="Select User"></select>
-                    </div>
-                    <div class="form-group">
                         <label for="device-type" class="col-form-label">Device Type:</label>
                         <select class="form-control" id="device-type" name="device_type">
                             <option selected="selected">Choose...</option>
@@ -24,26 +19,15 @@
                     </div>
                     <div class="form-group">
                         <label for="device-uuid" class="col-form-label">UUID:</label>
-                        <div class="input-group mb-3">
                             <input type="text" class="form-control" id="device-uuid" name="uuid" readonly="readonly">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-primary" type="button" id="generate-uuid"><i class="fa fa-refresh"></i></button>
-                            </div>
-                        </div>
                     </div>
                     <div class="form-group">
                         <label for="device-api-key" class="col-form-label">API KEY:</label>
-                        <div class="input-group mb-3">
                             <input type="text" class="form-control" id="device-api-key" name="api_key" readonly="readonly">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-success" type="button" id="generate-api-key"><i class="fa fa-refresh"></i></button>
-                            </div>
-                        </div>
                     </div>
                     <div class="form-group">
                         <label for="device-expired-at" class="col-form-label">Expired At:</label>
-                        <input type="text" id="device-expired-at" class="form-control"
-                            placeholder="Saturday 24 June 2017 - 21:44" name="expired_at">
+                        <input type="text" id="device-expired-at" class="form-control" name="expired_at">
                     </div>
                     <div class="form-group">
                         <label for="device-description" class="col-form-label">Description:</label>
@@ -53,7 +37,7 @@
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" value="1" name="is_active"
-                                    id="device-is-emergency">Is Active</label>
+                                    id="device-is-active">Is Active</label>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">

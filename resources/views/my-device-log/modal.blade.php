@@ -45,30 +45,3 @@
         </div>
     </div>
 </div>
-
-
-
-<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="device-log-modal-delete">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="device-log-modal-delete-title">Delete ALL Log Device</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="device-modal-delete-body">
-                <form id="device-log-form-delete">
-                    <div class="form-group">
-                        <h3>Are You Sure to DELETE ALL DATA in LOG TABLE?</h3>
-                    </div>
-                    <div class="form-group">
-                        <label for="device-log-password" class="col-form-label">Password:</label>
-                        <input type="password" class="form-control" id="device-log-password" name="password">
-                    </div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger" id="device-log-modal-submit-delete">Submit Delete</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
