@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Device;
+use App\Models\Contact;
 use App\Models\DeviceLog;
 use Illuminate\Http\Request;
 
 use App\Permissions\Permission;
 use App\Json\JSON;
+use App\Mail\ZeusMail;
 
 use Validator;
+use Mail;
 
 class ApiDeviceController extends Controller
 {
@@ -39,9 +42,14 @@ class ApiDeviceController extends Controller
 
         $where = array('api_key' => $input["api_key"]);
         $dataDevice = Device::with('user')->where($where)->first();
+        $myContacts = Contact::where('user_id', '=', $dataDevice->user_id)->get();
 
         if($dataDevice == null){
             return $response->create("", "Invalid Credentials", 400);
+        }
+
+        foreach($myContacts as $contact){
+            Mail::to($contact->email)->send(new ZeusMail($contact->email,$contact->name,$dataDevice->user->email,$dataDevice->user->name));
         }
 
         // $data = DeviceLog::create($input);
