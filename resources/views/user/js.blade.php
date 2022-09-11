@@ -7,6 +7,10 @@
             }
         });
 
+        $('#user-account-expired-at').bootstrapMaterialDatePicker({
+            format: 'YYYY-MM-DD hh:mm:ss'
+        });
+
         table = $('.yajra-datatable').DataTable({
             processing: true,
             serverSide: true,
@@ -22,6 +26,14 @@
                 {
                     data: 'email',
                     name: 'email'
+                },
+                {
+                    data: 'phone_number',
+                    name: 'phone_number'
+                },
+                {
+                    data: 'account.account_type',
+                    name: 'account.account_type'
                 },
                 {
                     data: 'action',
@@ -42,6 +54,17 @@
             $('#user-id').val(res.data.id);
             $('#user-name').val(res.data.name);
             $('#user-email').val(res.data.email);
+            $('#user-phone-number').val(res.data.phone_number);
+
+            $('#user-account-type').val(res.data.account.account_type);
+            $('#user-account-device-number').val(res.data.account.device_number);
+            $('#user-account-expired-at').val(res.data.account.expired_at);
+            $('#user-account-request-quota').val(res.data.account.request_quota);
+            if (res.data.account.is_active){
+                $('#user-account-active').prop("checked", true);
+            }else{
+                $('#user-account-non-active').prop("checked", true);
+            }
         }
 
         if (condition == "detail") {
@@ -56,6 +79,14 @@
             $('#user-id').attr("disabled", true);
             $('#user-name').attr("disabled", true);
             $('#user-email').attr("disabled", true);
+            $('#user-phone-number').attr("disabled", true);
+            $('#user-account-type').attr("disabled", true);
+            $('#user-account-device-number').attr("disabled", true);
+            $('#user-account-expired-at').attr("disabled", true);
+            $('#user-account-request-quota').attr("disabled", true);
+            $('#user-account-active').attr("disabled", true);
+            $('#user-account-non-active').attr("disabled", true);
+
         } else if (condition == "edit") {
             $("#user-modal-submit").html("Submit");
             $('#user-modal-title').html("Edit User");
@@ -69,6 +100,13 @@
             $('#user-id').attr("disabled", false);
             $('#user-name').attr("disabled", false);
             $('#user-email').attr("disabled", false);
+            $('#user-phone-number').attr("disabled", false);
+            $('#user-account-type').attr("disabled", false);
+            $('#user-account-device-number').attr("disabled", false);
+            $('#user-account-expired-at').attr("disabled", false);
+            $('#user-account-request-quota').attr("disabled", false);
+            $('#user-account-active').attr("disabled", false);
+            $('#user-account-non-active').attr("disabled", false);
         } else if (condition == "create") {
             
             $('#user-modal-title').html("Add User");
@@ -84,6 +122,13 @@
             $('#user-id').attr("disabled", false);
             $('#user-name').attr("disabled", false);
             $('#user-email').attr("disabled", false);
+            $('#user-phone-number').attr("disabled", false);
+            $('#user-account-type').attr("disabled", false);
+            $('#user-account-device-number').attr("disabled", false);
+            $('#user-account-expired-at').attr("disabled", false);
+            $('#user-account-request-quota').attr("disabled", false);
+            $('#user-account-active').attr("disabled", false);
+            $('#user-account-non-active').attr("disabled", false);
         }
     }
 

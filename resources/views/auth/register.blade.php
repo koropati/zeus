@@ -75,6 +75,17 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
+                                        <input type="text" id="phone_number"
+                                            class="form-control @error('phone_number') is-invalid @enderror"
+                                            placeholder="Phone Number" aria-label="Phone Number" name="phone_number"
+                                            value="{{ old('phone_number') }}" required autocomplete="phone_number">
+                                        @error('phone_number')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <input type="password" id="password"
                                             class="form-control @error('password') is-invalid @enderror" name="password"
                                             placeholder="Password" aria-label="Password" required

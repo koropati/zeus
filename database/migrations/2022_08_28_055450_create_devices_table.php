@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('api_key')->nullable(false)->unique();
             $table->dateTime('expired_at', $precision = 0)->nullable(false);
             $table->boolean('is_active')->default(false);
-            $table->text('description');
+            $table->text('description')->nullable(true);
             $table->timestamps();
         });
     }

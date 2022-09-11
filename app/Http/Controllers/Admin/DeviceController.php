@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Device;
+use App\Models\User;
+use App\Models\Account;
 use Illuminate\Http\Request;
 
 use App\Permissions\Permission;
@@ -88,6 +90,19 @@ class DeviceController extends Controller
         }
         $response = new JSON();
         $dataID = $request->id;
+
+        // Validasi jumlah device yang bisa di buat
+        if(!$dataID){
+            $where = array('user_id' => $request->user_id);
+            $account = Account::where($where)->first();
+            
+            $where = array('id' => $request->user_id);
+            $user = User::with("devices")->where($where)->first();
+
+            if (count($user->devices) >= $account->device_number) {
+                return $response->create("", "Device Limit Reached!", 400);
+            }
+        }
 
         $data = Device::updateOrCreate(
             [

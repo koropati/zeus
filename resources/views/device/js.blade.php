@@ -82,7 +82,7 @@
         });
 
         $('#device-expired-at').bootstrapMaterialDatePicker({
-            format: 'YYYY-MM-DDThh:mm:ss'
+            format: 'YYYY-MM-DD hh:mm:ss'
         });
 
         var urlUserDropDown = "{{ route('user.drop-down') }}";
@@ -115,6 +115,14 @@
             cb.val(cb.prop('checked') ? 1 : 0);
         });
 
+        $('#device-owner').change(function() {
+            generateDescription();
+        });
+
+        $('#device-type').change(function() {
+            generateDescription();
+        });
+
         $('#create-new-device').on('click', function() {
             let myUUID = generateUUID();
             let myAPIKey = generateAPIKey();
@@ -125,12 +133,21 @@
 
         $('#generate-uuid').on('click', function() {
             $('#device-uuid').val(generateUUID());
+            generateDescription();
         });
 
         $('#generate-api-key').on('click', function() {
             $('#device-api-key').val(generateAPIKey());
         });
     });
+
+    function generateDescription() {
+        var dataDescription = "";
+        dataDescription = dataDescription + $('#device-type').val();
+        dataDescription = dataDescription + " OWNER: " + $('#device-owner').val();
+        dataDescription = dataDescription + " UNIQ: " + $('#device-uuid').val();
+        $('#device-description').val(dataDescription);
+    }
 
     function prepShow(condition, res) {
         // Fill

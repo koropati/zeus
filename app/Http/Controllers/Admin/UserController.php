@@ -31,7 +31,7 @@ class UserController extends Controller
             abort(403);
         }
         if ($request->ajax()) {
-            $data = User::latest()->get();
+            $data = User::with('account')->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 // ->addColumn('action', function($row){
@@ -90,6 +90,14 @@ class UserController extends Controller
                 'password' => $password_encripted,
             ]
         );
+
+        $user->account()->updateOrCreate(['user_id'=>$user->id],[
+            'account_type' => $request->account_type,
+            'device_number' => $request->device_number,
+            'request_quota' => $request->request_quota,
+            'expired_at' => $request->expired_at,
+            'is_active' => $request->is_active,
+        ]);
         return $response->create($user, "Success Store Data", 200);
     }
 
@@ -107,7 +115,7 @@ class UserController extends Controller
         $response = new JSON();
 
         $where = array('id' => $request->id);
-        $user = User::where($where)->first();
+        $user = User::with('account')->where($where)->first();
 
         return $response->create($user, "Success", 200);
     }

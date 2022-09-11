@@ -71,8 +71,7 @@ class MyDeviceLogController extends Controller
         }
         $response = new JSON();
         $itemId = array('id' => $request->id);
-        $userIdLogin = array('user_id' => auth()->user()->id);
-        $data = DeviceLog::with('device')->where($itemId)->where($userIdLogin)->first();
+        $data = DeviceLog::with('device')->where($itemId)->first();
         return $response->create($data, "Success", 200);
     }
 

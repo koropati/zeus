@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->enum('account_type',['free','standard', 'enterprise'])->default('free');
             $table->integer('device_number');
-            $table->integer('request');
+            $table->integer('request_quota');
             $table->dateTime('expired_at', $precision = 0)->nullable(false);
             $table->boolean('is_active')->default(false);
             $table->timestamps();

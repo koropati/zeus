@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Account;
+use App\AccountPlan\AccountPlan;
 
 class AdminUserSeeder extends Seeder
 {
@@ -24,16 +25,8 @@ class AdminUserSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        $account = new Account;
-        $account->account_type = "enterprise";
-        $account->device_number = 1000;
-        $account->request = 99999;
-        $account->expired_at = "2025-01-01";
-        $account->is_active = true;
+        $account = new AccountPlan;
+        $user->account()->save($account->getEnterprise());
 
-        $user->account()->save($account);
-
-
-        
     }
 }

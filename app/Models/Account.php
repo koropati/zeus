@@ -13,7 +13,7 @@ class Account extends Model
         'user_id',
         'account_type',
         'device_number',
-        'request',
+        'request_quota',
         'expired_at',
         'is_active',
     ];

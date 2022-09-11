@@ -29,4 +29,5 @@ Route::group(['prefix' => 'log'], function () {
 
 Route::group(['prefix' => 'device'], function () {
     Route::post('store', [ApiDeviceController::class, 'store'])->name('api-device.store');
+    Route::get('store', [ApiDeviceController::class, 'storeGet'])->name('api-device.storeget');
 });
